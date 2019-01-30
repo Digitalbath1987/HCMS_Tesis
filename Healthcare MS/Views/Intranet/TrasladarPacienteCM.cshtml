@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Transferir paciente de centro médico o sector";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Transferir paciente de centro médico o sector</h2>
+
+<div class="row t-spacing">
+    <div class="form-inline" id="BuscarHora">
+        <div class="form-group col-sm-8 col-lg-3 col-md-3">
+            @Html.TextBox("txtCodExamen", "", new { @class = "col-sm-10 col-md-6 col-lg-4 form-control", @placeholder = "Rut sin puntos ni guión" })
+        </div>
+        <div class="form-group col-sm-4">
+            <p class="text-center"><a id="button-search" href="#" class="btn btn-primary col-sm-6" role="button" data-toggle="modal" data-target="#resultados">Buscar paciente</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resultados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Resultado de búsqueda</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre de Paciente</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Nombre prueba</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">RUT</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">xx.xxx.xxx-x</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Centro médico actual</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">CESFAM Carlos Lorca</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Sector</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Rojo</label>
+                            </div>
+                        </div>
+                        <div></div>
+                        <div class="row x-spacing"><h3>Transferir</h3></div>
+                        <div id="tabs"class="row x-spacing">
+                            <ul>
+                                <li><a href="#tab-sector">Sector</a></li>
+                                <li><a href="#tab-centro-medico">Centro médico</a></li>
+                            </ul>
+                            <div id="tab-sector">
+                                <div class="row bl-spacing">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label class="form-label">Selecciona el sector</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control">
+                                                <option>Rojo</option>
+                                                <option>Azul</option>
+                                                <option>Amarillo</option>
+                                                <option>Verde</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab-centro-medico">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label class="form-label">Selecciona el centro médico</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control">
+                                            <option>CESFAM Joan Alsina</option>
+                                            <option>CESFAM Carlos Lorca</option>
+                                            <option>CESFAM Laura Vicuña</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label class="form-label">Selecciona el sector</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control">
+                                            <option>Rojo</option>
+                                            <option>Azul</option>
+                                            <option>Amarillo</option>
+                                            <option>Verde</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6"><button type="button" class="btn btn-default col-sm-12" data-dismiss="modal">Cancelar</button></div>
+                            <div class="col-sm-6"><a class="btn btn-success btn-ok col-sm-12" href="#" role="button" data-toggle="modal" data-target="#confirm">Aceptar</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog bl-spacing" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Transferir paciente?</span>
+                </div>
+                <div class="col-sm-12">
+                    <label class="form-label">Recuerda revisar el comprobante de domicilio</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-success btn-ok" href="@Url.Action("TrasladarPacienteCM","Intranet")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>

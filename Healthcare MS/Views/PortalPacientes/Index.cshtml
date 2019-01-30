@@ -1,0 +1,108 @@
+﻿@model Healthcare_MS.Models.Paciente
+@{
+    ViewBag.Title = "Portal de pacientes";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Portal de pacientes</h2>
+
+<div class="row">
+    <div class="col">
+        <p>Bienvenido al portal de pacientes, aquí podrás realizar diversas acciones, como consultar tus horas médicas, reservar horas, consultar exámenes y revisar tu historial médico</p>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "PortalPacientes", FormMethod.Get))
+{
+    <div class="row bl-spacing">
+        <div class="col">
+            <h3>Próximos eventos</h3>
+
+            @if (Model.AgendaExamen.Where(a => a.FechaAgenda > DateTime.Now).ToList().Count > 0 || Model.HoraMedica.Where(a => a.FechaHoraCargada > DateTime.Now).ToList().Count() > 0)
+            {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.AgendaExamen.Where(a => a.FechaAgenda > DateTime.Now))
+                    {
+                        <tr>
+                            <td>Examen</td>
+                            <td>@item.FechaAgenda.ToShortDateString()</td>
+                            <td>@item.FechaAgenda.ToString("HH:mm")</td>
+                            <td>@Html.Raw("<a data-modal='" + @item.Codigo + "' href='/PortalPacientes/ResultadoHoraExamen/?Codigo=" + @item.Codigo + "' id='" + @item.Codigo + "'><span class='fa-stack fa-lg pull-left'><i class='fa fa-search fa-stack-1x'></i></span></a>")</td>
+                        </tr>
+                    }
+                    @foreach (var item in Model.HoraMedica.Where(a => a.FechaHoraCargada > DateTime.Now))
+                    {
+                        <tr>
+                            <td>Hora médica</td>
+                            <td>@item.FechaHoraCargada.ToShortDateString()</td>
+                            <td>@item.FechaHoraCargada.ToString("HH:mm")</td>
+                            <td>@Html.Raw("<a data-modal='" + @item.Codigo + "' href='/PortalPacientes/BuscarHora/?Codigo=" + @item.Codigo + "' id='" + @item.Codigo + "'><span class='fa-stack fa-lg pull-left'><i class='fa fa-search fa-stack-1x'></i></span></a>")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            }
+            else
+            {
+                <div class="x-spacing"><h4>No tienes horas o exámenes agendados</h4></div>
+            }
+        </div>
+    </div>
+}
+
+<div id="Modal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='ModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#ModalContent').load(this.href, function () {
+                    $('#Modal').modal({
+                        keyboard: true
+                    }, 'show');
+                    bindForm(this);
+                });
+                return false;
+            });
+        });
+
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $('#Progress').modal('toggle');
+                $('#resultado').remove()
+                var data = {
+                    Codigo: $(this)["data-modal"]
+                }
+                $.ajax({
+                    url: this.action,
+                    type: "GET",
+                    data: data
+                }).success(function (html) {
+                    $('#ModalContent').append(html);
+                    $('#Progress').modal('toggle');
+                    $('#Modal').modal('toggle');                        
+                });
+                return false;
+            });
+        }
+    </script>
+}

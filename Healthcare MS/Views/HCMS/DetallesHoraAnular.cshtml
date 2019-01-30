@@ -1,0 +1,86 @@
+﻿@model Healthcare_MS.Models.HoraMedica
+
+<div id="resultado">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Anular hora</h3>
+    </div>
+
+
+    @using (Html.BeginForm("AnularHora", "HCMS", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+            <div id="div-login-msg">
+                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                <span id="text-login-msg">Resultado de búsqueda por código</span>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.Paciente.Persona.NombreCompleto, "Nombre completo", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Paciente.Persona.NombreCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.Paciente.Persona.RutCompleto, "RUT", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Paciente.Persona.RutCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.Paciente.Sector.Establecimiento.Nombre, "Centro médico", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Paciente.Sector.Establecimiento.Nombre, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.Funcionario_Especialidad.Especialidad.Nombre, "Especialidad", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Funcionario_Especialidad.Especialidad.Nombre, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.Funcionario_Especialidad.Funcionario.Persona.NombreCompleto, "Médico", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Funcionario_Especialidad.Funcionario.Persona.NombreCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.FechaHoraCargada, "Fecha y hora solicitada", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.fechaParseada, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.EstadoHoraMedica.Nombre, "Estado", new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.EstadoHoraMedica.Nombre, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <h3>
+                            <span class="label label-danger">
+                                ¿Estás seguro que deseas anular la hora médica?
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">No</button>
+            <input class="btn btn-danger" type="submit" value="Sí" />
+        </div>
+    }
+</div>

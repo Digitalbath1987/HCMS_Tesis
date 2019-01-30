@@ -1,0 +1,573 @@
+﻿
+@{
+    ViewBag.Title = "Historial médico de pacientes";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Historial médico de pacientes</h2>
+
+<div class="row t-spacing">
+    <div class="form-group" id="BuscarHora">
+        <div class="form-group row x-spacing">
+            @Html.TextBox("txtCodExamen", "", new { @class = "col-sm-10 col-md-6 col-lg-4 form-control", @placeholder = "Rut sin puntos ni guión" })
+        </div>
+        <div class="form-group row x-spacing">
+            <a id="button-search" href="#" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 " role="button">Buscar ficha</a>
+            <a id="button-update" href="#" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 x-spacing" role="button">Actualizar ficha</a>
+        </div>
+    </div>
+</div>
+
+<div id="data" style="display:none" class="bl-spacing x-spacing t-spacing">
+    <h3>Ficha clínica</h3>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Datos personales</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "xx.xxx.xxx-x", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Nombre completo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Paciente Prueba1", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "10/08/1970", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Edad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "47", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Sexo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Masculino", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Ocupación", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Profesor", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Estado Civil", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Casado", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Nacionalidad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Chilena", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Region", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Metropolitana", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "El bosque", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Escolaridad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Universitaria completa", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Estatura", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "1.75 metros", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Peso", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "108 kilogramos", new { @class = "col-sm-8 form-label" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes heredofamiliares</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Padres vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "2", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Padres fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "0", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hermanos vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "1", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hermanos fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "1", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Ataque cardiovascular, 54 años", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hijos vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "3", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hijos fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "0", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Enfermedades hereditarias</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Enfermedad</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hipertensión</td>
+                            <td>Controlada</td>
+                        </tr>
+                        <tr>
+                            <td>Diabetes Mellitus tipo 2</td>
+                            <td>Paciente no tiene dieta regular</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes personales no patológicos</h4>
+            <hr />
+            <h4>Hábitos tóxicos</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Alcohol", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Bebedor social", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Tabaco", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "10 cigarrillos diarios", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Drogas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "No", new { @class = "col-sm-8 form-label" })
+            </div>
+            <hr>
+            <h4>Habitos fisiológicos</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Alimentación", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Tiene sobrepeso, no cuida su alimentación", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Dipsia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Diuresis", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Catarsis", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Somnia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Otros", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "", new { @class = "col-sm-8 form-label" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes personales patológicos</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Observación", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Altos niveles de estrés", new { @class = "col-sm-8 form-label" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="data1" style="display:none" class="bl-spacing x-spacing t-spacing">
+    <h3>Ficha clínica</h3>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Datos personales</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "xx.xxx.xxx-x", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Nombre completo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Paciente Prueba1", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "10/08/1970", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Edad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "47", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Sexo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "Masculino", new { @class = "col-sm-8 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Ocupación", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Profesor", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Estado Civil", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Casado", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Nacionalidad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Chilena", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Region", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                <select class="form-control">
+                    <option>Región Metropolitana</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                <select class="form-control">
+                    <option>San Bernardo</option>
+                    <option>El Bosque</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Dirección", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Direccion 1", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Escolaridad", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Universitaria completa", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Estatura", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "1.75 metros", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Peso", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "108 kilogramos", new { @class = "col-sm-8 form-control" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes heredofamiliares</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Padres vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "2", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Padres fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "0", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hermanos vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "1", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hermanos fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "1", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Ataque cardiovascular, 54 años", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hijos vivos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "3", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Hijos fallecidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "0", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Causas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Enfermedades hereditarias</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Enfermedad</th>
+                            <th>Observaciones</th>
+                            <th>Modificar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hipertensión</td>
+                            <td>Controlada</td>
+                            <td><a href="#" data-toggle="modal" data-target="#modificar-enfermedad"><span class="fa-stack fa-lg pull-left"><i class="fa fa-edit fa-stack-1x "></i></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>Diabetes Mellitus tipo 2</td>
+                            <td>Paciente no tiene dieta regular</td>
+                            <td><a href="#" data-toggle="modal" data-target="#modificar-enfermedad"><span class="fa-stack fa-lg pull-left"><i class="fa fa-edit fa-stack-1x "></i></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-sm-6"><a href="#" data-toggle="modal" class="btn btn-primary" data-target="#agregar-enfermedad">Agregar Enfermedad</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes personales no patológicos</h4>
+            <hr />
+            <h4>Hábitos tóxicos</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Alcohol", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Bebedor social", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Tabaco", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "10 cigarrillos diarios", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Drogas", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "No", new { @class = "col-sm-8 form-control" })
+            </div>
+            <hr>
+            <h4>Habitos fisiológicos</h4>
+            <div class="form-group row">
+                @Html.Label("RUT", "Alimentación", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "Tiene sobrepeso, no cuida su alimentación", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Dipsia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Diuresis", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Catarsis", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Somnia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("RUT", "Otros", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("RUT_", "", new { @class = "col-sm-8 form-control" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="t-spacing">
+        <div class="row">
+            <h4>Antecedentes personales patológicos</h4>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Observación</th>
+                                <th>Fecha</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Se registra hipertensión</td>
+                                <td>05-09-2016</td>
+                                <td>Se le indica seguir dieta, reducir sodio</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <div class="form-group row">
+                        <div class="col-sm-6"><a href="#" data-toggle="modal" class="btn btn-primary" data-target="#agregar-antecedente">Agregar antecedente</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="agregar-enfermedad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Agregar enfermedad hereditaria</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Observación</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6"><button type="button" class="btn btn-default col-sm-12" data-dismiss="modal">Cancelar</button></div>
+                            <div class="col-sm-6"><button type="button" class="btn btn-success col-sm-12" data-dismiss="modal">Agregar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modificar-enfermedad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Modificar enfermedad hereditaria</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" value="Hipertensión" />
+                            </div>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Observación</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" value="Controlada" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6"><button type="button" class="btn btn-default col-sm-12" data-dismiss="modal">Cancelar</button></div>
+                            <div class="col-sm-6"><button type="button" class="btn btn-success col-sm-12" data-dismiss="modal">Modificar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="agregar-antecedente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Agregar antecedente</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Observación</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Detalles</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6"><button type="button" class="btn btn-default col-sm-12" data-dismiss="modal">Cancelar</button></div>
+                            <div class="col-sm-6"><button type="button" class="btn btn-success col-sm-12" data-dismiss="modal">Agregar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#button-search').click(function () {
+            $('#data').stop(true).fadeIn();
+            $('#data1').stop(true).fadeOut();
+        })
+    });
+
+    $(document).ready(function () {
+        $('#button-update').click(function () {
+            $('#data1').stop(true).fadeIn();
+            $('#data').stop(true).fadeOut();
+        })
+    });
+</script>

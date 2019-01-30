@@ -1,0 +1,86 @@
+﻿@model Healthcare_MS.Models.Examen
+
+<div id="resultado">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Anular examen</h3>
+    </div>
+    @using (Html.BeginForm("AnularHora", "PortalPacientes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+            <div id="div-login-msg">
+                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                <span id="text-login-msg">Resultado de búsqueda por código</span>
+            </div>
+            <div class="form-horizontal row t-spacing">
+                <div class="row">
+                    @Html.LabelFor(m => Model.AgendaExamen.Paciente.Persona.NombreCompleto, "Nombre paciente", new { @class = "control-label col-sm-5" })
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.AgendaExamen.Paciente.Persona.NombreCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(m => Model.AgendaExamen.Paciente.Persona.RutCompleto, "RUT", new { @class = "control-label col-sm-5" })
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.AgendaExamen.Paciente.Persona.RutCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(m => Model.AgendaExamen.Sector.Establecimiento.Nombre, "Centro médico", new { @class = "control-label col-sm-5" })
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.AgendaExamen.Sector.Establecimiento.Nombre, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(m => Model.fechaParseada, "Fecha y hora del examen", new { @class = "control-label col-sm-5" })
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.fechaParseada, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="row x-spacing"><h3>Resultados</h3></div>
+                <div class="row x-spacing">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de examen</th>
+                                    <th>Valor de referencia</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Examen_TipoExamen)
+                                {
+                                    <tr>
+                                        <td>@item.TipoExamen.CategoriaExamen.Nombre - @item.TipoExamen.Nombre</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <h3>
+                            <span class="label label-danger">
+                                ¿Estás seguro que deseas anular la hora médica?
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">No</button>
+            <input class="btn btn-danger" type="submit" value="Sí" />
+        </div>
+    }
+</div>
+

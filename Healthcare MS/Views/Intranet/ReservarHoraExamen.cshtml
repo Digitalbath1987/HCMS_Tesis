@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Reservar hora para examen";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Reservar hora para examen</h2>
+
+<div class="form-group row">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el centro médico</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Joan Alsina</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el sector</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Rojo</option>
+            <option>Azul</option>
+            <option>Amarillo</option>
+            <option>Verde</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el paciente</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Paciente Prueba 1</option>
+            <option>Paciente Prueba 2</option>
+            <option>Paciente Prueba 3</option>
+            <option>Paciente Prueba 4</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="form-group">
+        <div class="col-sm-4 col-md-3 col-lg-3">
+            <label class="form-label">Selecciona la fecha</label>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <input type="date" class="col-sm-4 col-md-3 col-lg-2 form-control" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <a href="#" data-toggle="modal" data-target="#examen-disponible"><span class="fa-stack fa-lg pull-left"><i class="fa fa-search fa-stack-1x "></i></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="examen-disponible" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="max-width:300px">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Horas disponibles</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-8">Hora</th>
+                                            <th class="col-sm-4">Solicitar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10:15</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>11:00</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-hora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Solicitar hora para examen?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok" href="@Url.Action("Index","PortalPacientes")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>

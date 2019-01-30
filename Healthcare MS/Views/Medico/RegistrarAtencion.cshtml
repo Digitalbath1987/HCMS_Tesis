@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "Registrar atención";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Registrar atención</h2>
+
+<div id="tabs" class="t-spacing bl-spacing x-spacing">
+    <ul>
+        <li><a href="#tab-paciente">Buscar hora de paciente</a></li>
+        <li><a href="#tab-horas">Horas pendientes de hoy</a></li>
+    </ul>
+
+    <div id="tab-paciente">
+        <div class="row t-spacing x-spacing">
+            <div class="form-inline" id="BuscarHora">
+                <div class="form-group col-sm-8 col-lg-3 col-md-3">
+                    @Html.TextBox("txtCodExamen", "", new { @class = "col-sm-10 col-md-6 col-lg-4 form-control", @placeholder = "Rut sin puntos ni guión" })
+                </div>
+                <div class="form-group col-sm-4">
+                    <p class="text-center"><a id="button-search" href="#" class="btn btn-primary col-sm-6" role="button" style="color:#FFF">Buscar paciente</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="row t-spacing x-spacing" id="data" style="display:none">
+            <div class="row"><h4>Horas pendientes de hoy</h4></div>
+            <div class="row bl-spacing">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Médico</th>
+                                <th>Especialidad</th>
+                                <th>Finalizar atención</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>11:15</td>
+                                <td>Médico 1</td>
+                                <td>Medicina general</td>
+                                <td><a href="#" data-toggle="modal" data-target="#finalizar-atencion"><span class="fa-stack fa-lg pull-left"><i class="fa fa-check fa-stack-1x "></i></span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tab-horas">
+        <div class="row t-spacing x-spacing">
+            <h4>Tus horas pendientes de hoy</h4>
+            <div class="row bl-spacing">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+                                <th>Especialidad</th>
+                                <th>Finalizar atención</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>11:15</td>
+                                <td>Paciente 1</td>
+                                <td>Medicina general</td>
+                                <td><a href="#" data-toggle="modal" data-target="#finalizar-atencion"><span class="fa-stack fa-lg pull-left"><i class="fa fa-check fa-stack-1x "></i></span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="finalizar-atencion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Finalizando atención</span>
+                        </div>
+                            <div class="row t-spacing">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Paciente</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-control">Paciente Prueba 1</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Médico</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-control">Médico 1</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Fecha y hora</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-control">10-10-2017 11:15</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Especialidad</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-control">Medicina General</label>
+                                </div>
+                            </div>
+                            <div class="row t-spacing">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Observación</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-sm-6"><button type="button" class="btn btn-default col-sm-12" data-dismiss="modal">Cancelar</button></div>
+                            <div class="col-sm-6"><button type="button" class="btn btn-success col-sm-12" data-dismiss="modal">Finalizar</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#button-search').click(function () {
+            $('#data').stop(true).fadeIn();
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>

@@ -1,0 +1,88 @@
+﻿@model Healthcare_MS.Models.IntranetLogin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    @Styles.Render("~/CSSBundle")
+    <link href="~/ContentCSS/simple-sidebar.css" rel="stylesheet">
+    <link href="~/ContentCSS/css/font-awesome.min.css" rel="stylesheet">
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/ContentCSS/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
+        <div class="navbar-header fixed-brand">
+            <a class="navbar-brand" href="@Url.Action("Index", "HCMS")" title="HCMS"><i class="fa fa-heartbeat fa-4" aria-hidden="true"></i> HCMS</a>
+        </div>
+    </nav>
+    <div>
+        <div class="container bl-spacing">
+            <div class="row main">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">
+                        <h1 class="title">HCMS</h1>
+                        <hr />
+                        <h3 class="title">Intranet</h3>
+                    </div>
+                </div>
+                <div class="main-login main-center">
+                    @using (Html.BeginForm("Login", "Intranet", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">RUT</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    @Html.TextBoxFor(m => m.Rut, new { @class = "form-control", placeholder = "Ingresa tu RUT"})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">Contraseña</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingresa tu Contraseña" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Iniciar Sesión" />
+                        </div>
+                        if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+                        {
+                            <div class="form-group">
+                                <div class="col"><small class="text-danger">@ViewBag.Error</small></div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="row">
+                <div class="col-sm-push-1">
+                    <a href="@Url.Action("Index","HCMS")" title="Página de inicio"><h4><span class="textfooter">HCMS&copy;</span></h4></a>
+                </div>
+                <div class="col-sm-pull-1 pull-right">
+                    <div class="row">
+                        <a href="@Url.Action("Login","PortalPacientes")" title="Portal de pacientes"><span class="textfooter">Portal de pacientes</span></a>
+                    </div>
+                    <div class="row">
+                        <a href="@Url.Action("Login", "Intranet")" title="Intranet"><span class="textfooter">Intranet</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

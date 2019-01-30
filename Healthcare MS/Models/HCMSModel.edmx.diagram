@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3fa34e010b244ac5bd0bd5e7f0df8d9a" Name="Diagram1">
+        <EntityTypeShape EntityType="HCMSModel.AgendaExamen" Width="1.5" PointX="9.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.CategoriaExamen" Width="1.5" PointX="10.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Cobertura" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Comuna" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Especialidad" Width="1.5" PointX="10.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Establecimiento" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.EstadoHoraMedica" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Examen_TipoExamen" Width="1.5" PointX="15" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.ExamenAnulado" Width="1.5" PointX="12" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Funcionario" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Funcionario_Especialidad" Width="1.5" PointX="12.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Funcionario_Establecimiento" Width="1.5" PointX="9.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.HoraAnulada" Width="1.5" PointX="15" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.HoraMedica" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Paciente" Width="1.5" PointX="12.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Persona" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Region" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.ResultadoExamen" Width="1.5" PointX="17.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Rol" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Rol_Persona" Width="1.5" PointX="7.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.Sector" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HCMSModel.TipoExamen" Width="1.5" PointX="12.75" PointY="30" IsExpanded="true" />
+        <AssociationConnector Association="HCMSModel.FK_agenda_ex_tipo_agendaExamen" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_agenda_examen_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_agenda_examen_paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_AgendaExamen_funcionarioAtencion" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_AgendaExamen_Sector" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_ExamenAnulado_AgendaExamen" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_TipoExamen_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_paciente_cobertura" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Comuna_Comuna" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_establecimiento_establecimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_persona_comuna" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Funcionario_Especialidad_Especialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Funcionario_Establecimiento_Establecimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Sector_Establecimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraMedica_EstadoHoraMedica" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_agenda_ex_tipo_tipo_examen" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_resultado_examen_agenda_ex_tipo" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Funcionario_Especialidad_Funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Funcionario_Establecimiento_Funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_persona_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraMedica_Funcionario_Especialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraAnulada_HoraMedica" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraAnulada_Rol_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraMedica_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_HoraMedica_Sector" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_paciente_persona" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_paciente_sector" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Rol_Persona_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="HCMSModel.FK_Rol_Persona_Rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

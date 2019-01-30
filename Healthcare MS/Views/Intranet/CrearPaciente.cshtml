@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Crear nuevo paciente";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Crear paciente</h2>
+<hr />
+<h3>Datos personales del paciente</h3>
+<form>
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.Label("RUT", "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("RUT_", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @placeholder = "Ingresa el rut" })
+            @Html.TextBox("DV", "", new { @class = "form-control", @style = "width:40px; margin-left:10px; display:inline", @maxlength = "1"})
+        </div>
+        <div class="form-group row">
+            @Html.Label("Nombres", "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("nombres", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @placeholder = "Ingresa los nombres del paciente" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("Apellidos", "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("apellidos", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("FechaNacimiento", "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            <input type="date" class="col-sm-4 col-md-3 col-lg-2 form-control" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="form-group row">
+            @Html.Label("Region", "Region", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            <select class="form-control">
+                <option>Región Metropolitana</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Comuna", "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            <select class="form-control">
+                <option>San Bernardo</option>
+                <option>El Bosque</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            @Html.Label("Direccion", "Direccion", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("Direccion", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+    </div>
+</form>
+
+<hr />
+<h3>Datos de contacto</h3>
+<form>
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.Label("telefono", "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("telefono", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("celular", "Celular", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("celular", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("email", "Correo electrónico", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("email", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+    </div>
+</form>
+
+<hr />
+<h3>Contacto de paciente</h3>
+<form>
+    <div class="row x-spacing bl-spacing">
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.Label("nombresContacto", "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("nombresContacto", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("apellidosContacto", "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("apellidosContacto", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("parentesco", "Parentesco", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("parentesco", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("telefonoContacto", "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("telefonoContacto", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("celularContacto", "Celular", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("celularContacto", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("correoContacto", "Correo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("correoContacto", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#confirm-data">
+                    Ingresar Paciente
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="modal fade" id="confirm-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Crear paciente?</span>
+                </div>
+                <div class="row t-spacing">
+                    <div class="col-sm-12">
+                        <label class="form-label">Se enviará un correo con la contraseña generada al paciente</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok" href="@Url.Action("Index","Intranet")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+

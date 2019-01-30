@@ -1,0 +1,227 @@
+﻿@model Healthcare_MS.Models.IntranetAnularHora
+
+@{
+    ViewBag.Title = "Anular Hora";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Anular hora médica</h2>
+
+<div id="tabs" class="t-spacing bl-spacing">
+
+    <ul>
+        <li><a href="#tab-paciente">Por paciente</a></li>
+        <li><a href="#tab-codigo">Por código de hora</a></li>
+    </ul>
+
+    <div id="tab-paciente">
+        <div class="row bl-spacing">
+            <div class="form-group">
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <label class="form-label">Selecciona al paciente</label>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <select class="form-control">
+                        <option>Paciente Prueba 1</option>
+                        <option>Paciente Prueba 2</option>
+                        <option>Paciente Prueba 3</option>
+                        <option>Paciente Prueba 4</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <a href="#" data-toggle="modal" data-target="#buscar-paciente"><span class="fa-stack fa-lg pull-left"><i class="fa fa-search fa-stack-1x "></i></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-codigo">
+        <div class="row bl-spacing">
+            <div class="form-inline" id="BuscarHora">
+                <div class="form-group col-sm-8 col-lg-3 col-md-3">
+                    @Html.TextBox("txtCodExamen", "", new { @class = "col-sm-10 col-md-6 col-lg-4 form-control", @placeholder = "Ingresa el código de hora" })
+                </div>
+                <div class="form-group col-sm-4">
+                    <p class="text-center"><a href="#" class="btn btn-primary col-sm-6" role="button" data-toggle="modal" data-target="#buscar-codigo" style="color:#FFF">Buscar</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="buscar-paciente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Próximas horas del paciente</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Paciente</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Paciente Prueba 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">RUT</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">xx.xxx.xxx-x</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-4">Especialidad</th>
+                                            <th class="col-sm-3">Fecha</th>
+                                            <th class="col-sm-3">Hora</th>
+                                            <th class="col-sm-2">Anular</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Medicina general</td>
+                                            <td>10-10-2017</td>
+                                            <td>14:15</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#anular-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar-minus-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Medicina general</td>
+                                            <td>24-10-2017</td>
+                                            <td>11:00</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#anular-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar-minus-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="buscar-codigo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog bl-spacing">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div id="div-forms">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Resultado de búsqueda</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre de Paciente</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Nombre prueba</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">RUT</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">xx.xxx.xxx-x</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Centro médico</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">CESFAM Carlos Lorca</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Médico</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Médico prueba</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Fecha y hora solicitada</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">20-10-2017 10:00</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Especialidad</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Medicina General</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Sector</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Sector 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <a href="#" data-toggle="modal" data-target="#anular-hora" class="btn btn-primary col-sm-12">Anular</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="anular-hora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Anular hora médica?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok" href="@Url.Action("ActualizarAtencion","Intranet")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>

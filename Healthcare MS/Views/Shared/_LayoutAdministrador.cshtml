@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración</title>
+    @Styles.Render("~/CSSBundle")
+    <link href="~/ContentCSS/simple-sidebar.css" rel="stylesheet">
+    <link href="~/ContentCSS/css/font-awesome.min.css" rel="stylesheet">
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
+        <div class="container-fluid">
+            <div class="navbar-header fixed-brand">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+                    <span class="glyphicon glyphicon-th-large" style="color:white" aria-hidden="true"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Administrador")" title="HCMS"><i class="fa fa-heartbeat fa-4" aria-hidden="true"></i> HCMS</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Logout", "Administrador", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        Html.AntiForgeryToken();
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a>Hola, @Session["NombreCompleto"].ToString()</a></li>
+                            <li class="active"><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+                        </ul>                        
+                    }
+                }
+                <ul class="nav navbar-nav">
+                    <li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" style="color:white" aria-hidden="true"></span></button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper" style="margin-top:6px">
+        @{ string ActionName = ViewContext.RouteData.Values["Action"].ToString();}
+        <div id="sidebar-wrapper" style="background-color:#222">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <li class="@(ActionName == "Index" ? "active" : ActionName == "VerDatosCM" ? "active" : ActionName == "ModificarDatosCM" ? "active" : ActionName == "Sectores" ? "active" : "")">
+                    <a href="#"><span class="fa-stack fa-lg pull-left" aria-hidden="true"><i class="fa fa-hospital-o fa-stack-1x "></i></span> Centro médico</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li class="@(ActionName == "VerDatosCM" ? "active" : "")"><a href="@Url.Action("VerDatosCM","Administrador")" title="Datos de centro médico"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x"></i></span> Datos de centro médico</a></li>
+                        <li class="@(ActionName == "ModificarDatosCM" ? "active" : "")"><a href="@Url.Action("ModificarDatosCM","Administrador")" title="Actualizar datos"><span class="fa-stack fa-lg pull-left"><i class="fa fa-edit fa-stack-1x"></i></span> Modificar datos</a></li>
+                        <li class="@(ActionName == "Sectores" ? "active" : "")"><a href="@Url.Action("Sectores","Administrador")" title="Ver los sectores"><span class="fa-stack fa-lg pull-left"><i class="fa fa-puzzle-piece fa-stack-1x"></i></span> Sectores</a></li>
+                    </ul>
+                </li>
+                <li class="@(ActionName == "CrearFuncionario" ? "active" : ActionName == "ModificarFuncionario" ? "active" : ActionName == "BloquearDesbloquear" ? "active" : "")">
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-circle-o fa-stack-1x "></i></span> Funcionarios</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li class="@(ActionName == "CrearFuncionario" ? "active" : "")"><a href="@Url.Action("CrearFuncionario","Administrador")" title="Crear funcionario"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus-square-o fa-stack-1x "></i></span> Crear funcionario</a></li>
+                        <li class="@(ActionName == "ModificarFuncionario" ? "active" : "")"><a href="@Url.Action("ModificarFuncionario", "Administrador")" title="Modificar funcionario"><span class="fa-stack fa-lg pull-left"><i class="fa fa-edit fa-stack-1x "></i></span> Modificar funcionario</a></li>
+                        <li class="@(ActionName == "BloquearDesbloquear" ? "active" : "")"><a href="@Url.Action("BloquearDesbloquear", "Administrador")" title="Bloqueo/Desbloqueo de cuentas"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span> Bloquear / Desbloquear</a></li>
+                    </ul>
+                </li>
+                <li class="@(ActionName == "ActualizarDatos" ? "active" : "")">
+                    <a href="@Url.Action("ActualizarDatos","Administrador")" title="Actualiza tus datos"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-o fa-stack-1x "></i></span> Actualiza tus datos</a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-navicon fa-stack-1x "></i></span> Navegación</a>
+                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                            @if (User.IsInRole("Master"))
+                            {
+                                <li><a href="@Url.Action("Index", "Master")" title="HCMS - Panel de administración"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heartbeat fa-stack-1x "></i></span> Administrar HCMS</a></li>
+                            }
+                            @if (User.IsInRole("Administrativo"))
+                            {
+                                <li><a href="@Url.Action("Index", "Intranet")" title="Ingresar a la intranet"><span class="fa-stack fa-lg pull-left"><i class="fa fa-medkit fa-stack-1x "></i></span> Administrar pacientes</a></li>
+                            }
+                            @if (User.IsInRole("Médico"))
+                            {
+                                <li><a href="@Url.Action("Index", "Medico")" title="Ingresar al área médica"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-md fa-stack-1x "></i></span> Médicos</a></li>
+                            }
+                            @if (User.IsInRole("Paciente"))
+                            {
+                                <li><a href="@Url.Action("Index", "PortalPacientes")" title="Portal de pacientes"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-o fa-stack-1x "></i></span> Portal de pacientes</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid body-content xyz">
+                <div style="height:80%">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="row">
+                <div class="col-sm-10">
+                    <a href="@Url.Action("Index","HCMS")" title="Página de inicio"><h4><span class="textfooter">HCMS&copy;</span></h4></a>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row">
+                        <a href="@Url.Action("Login","PortalPacientes")" title="Portal de pacientes"><span class="textfooter">Portal de pacientes</span></a>
+                    </div>
+                    <div class="row">
+                        <a href="@Url.Action("Login", "Intranet")" title="Intranet"><span class="textfooter">Intranet</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Progress" class="modal fade in">
+        <div class="modal-dialog text-center">
+            <span id="progress" class="text-center" style="">
+                <img src="~/images/loading.gif" alt="Espera..." style="width:15%; height:15%" />
+            </span>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.js")" type="text/javascript"></script>
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/sidebar_menu.js"></script>
+</body>
+</html>
+

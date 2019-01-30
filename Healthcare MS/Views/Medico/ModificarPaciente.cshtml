@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Modificar datos de paciente";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Modificar datos de paciente</h2>
+
+<div class="row t-spacing">
+    <div class="form-inline" id="BuscarHora">
+        <div class="form-group col-sm-8 col-lg-3 col-md-3">
+            @Html.TextBox("txtCodExamen", "", new { @class = "col-sm-10 col-md-6 col-lg-4 form-control", @placeholder = "Rut sin puntos ni guión" })
+        </div>
+        <div class="form-group col-sm-4">
+            <p class="text-center"><a id="button-search" href="#" class="btn btn-primary col-sm-6" role="button">Buscar paciente</a></p>
+        </div>
+    </div>
+</div>
+
+<div id="data" style="display:none">
+    <h3>Datos personales</h3>
+    <form>
+        <div class="row x-spacing">
+            <div class="form-group row">
+                @Html.Label("RUT", "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Label("RUT_", "xx.xxx.xxx-x", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("Nombres", "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("nombres", "Alicia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("Apellidos", "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("apellidos", "Victoriano", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("FechaNacimiento", "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                <input type="date" class="col-sm-4 col-md-3 col-lg-2 form-control" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" value="1980-05-10" />
+            </div>
+            <div class="form-group row">
+                @Html.Label("Region", "Region", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                <select class="form-control">
+                    <option>Región Metropolitana</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                @Html.Label("Comuna", "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                <select class="form-control">
+                    <option>San Bernardo</option>
+                    <option>El Bosque</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                @Html.Label("Direccion", "Direccion", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("Direccion", "General Urrutia 319", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                    Actualizar datos personales
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <h3>¿Cómo podemos contactarte?</h3>
+    <form>
+        <div class="row x-spacing">
+            <div class="form-group row">
+                @Html.Label("telefono", "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("telefono", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("celular", "Celular", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("celular", "9 9346 6449", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("email", "Correo electrónico", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBox("email", "correo.prueba@pruebas.cl", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                    Actualizar datos de contacto
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <h3>Contraseña</h3>
+    <form>
+        <div class="row x-spacing bl-spacing">
+            <div class="form-group">
+                <div class="form-group row">
+                    @Html.Label("newPass", "Nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                    @Html.Password("newPass", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+                </div>
+                <div class="form-group row">
+                    @Html.Label("repeatPass", "Repite la nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                    @Html.Password("repeatPass", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+                </div>
+                <div class="form-group row">
+                    <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                        Cambiar contraseña
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <h3>Centro médico</h3>
+    <form>
+        <div class="row x-spacing bl-spacing">
+            <div class="form-group">
+                <div class="form-group row">
+                    @Html.Label("newPass", "Centro médico", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                    <select class="form-control">
+                        <option>CESFAM Joan Alsina</option>
+                        <option>CESFAM Carlos Lorca</option>
+                        <option>CESFAM Laura Vicuña</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("repeatPass", "Sector", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                    <select class="form-control">
+                        <option>Rojo</option>
+                        <option>Azul</option>
+                        <option>Verde</option>
+                        <option>Amarillo</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#confirm-data">
+                        Cambiar establecimiento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="confirm-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Estás seguro que deseas modificar el centro médico?</span>
+                </div>
+                <div class="row t-spacing">
+                    <div class="col-sm-12">
+                        <label class="form-label">Recuerda revisar el comprobante de domicilio</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok" href="@Url.Action("Index","Intranet")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#button-search').click(function () {
+        $('#data').stop(true).fadeIn();
+    })
+});
+</script>

@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "ReservarHora";
+}
+@section Styles{
+    <link href="@Url.Content("~/ContentCSS/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ContentCSS/Partial.css")" rel="stylesheet" type="text/css" />
+}
+
+<h2>Reservar hora</h2>
+
+<div class="row t-spacing">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el centro médico</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Joan Alsina</option>
+        </select>
+    </div>
+</div>
+
+<div class="row t-spacing">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el sector</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Rojo</option>
+            <option>Azul</option>
+            <option>Amarillo</option>
+            <option>Verde</option>
+        </select>
+    </div>
+</div>
+
+<div class="row t-spacing">
+    <div class="col-sm-4 col-md-3 col-lg-3"><label class="form-label">Selecciona el paciente</label></div>
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <select class="form-control">
+            <option>Paciente Prueba 1</option>
+            <option>Paciente Prueba 2</option>
+            <option>Paciente Prueba 3</option>
+            <option>Paciente Prueba 4</option>
+        </select>
+    </div>
+</div>
+
+<div id="tabs" class="t-spacing bl-spacing">
+
+    <ul>
+        <li><a href="#tab-especialidad">Por especialidad</a></li>
+        <li><a href="#tab-medico">Por médico</a></li>
+    </ul>
+
+    <div id="tab-especialidad">
+        <div class="row bl-spacing">
+            <div class="form-group">
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <label class="form-label">Selecciona la especialidad</label>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <select class="form-control">
+                        <option>Medicina General</option>
+                        <option>Traumatología</option>
+                        <option>Psicología</option>
+                        <option>Odontología</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <a href="#" data-toggle="modal" data-target="#horas-disponibles-especialidad"><span class="fa-stack fa-lg pull-left"><i class="fa fa-search fa-stack-1x "></i></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-medico">
+        <div class="row bl-spacing">
+            <div class="form-group">
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <label class="form-label">Selecciona un médico</label>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <select class="form-control">
+                        <option>Médico 1</option>
+                        <option>Médico 2</option>
+                        <option>Médico 3</option>
+                        <option>Médico 4</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <a href="#" data-toggle="modal" data-target="#horas-disponibles-medico"><span class="fa-stack fa-lg pull-left"><i class="fa fa-search fa-stack-1x "></i></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="horas-disponibles-especialidad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Próximas horas disponibles</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre Paciente</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Paciente Prueba 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">RUT</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">xx.xxx.xxx-x</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Centro Médico</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">CESFAM Joan Alsina</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Sector</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Sector Azul</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Especialidad</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Medicina General</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-4">Médico</th>
+                                            <th class="col-sm-3">Fecha</th>
+                                            <th class="col-sm-3">Hora</th>
+                                            <th class="col-sm-2">Solicitar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Médico 1</td>
+                                            <td>20-10-2017</td>
+                                            <td>10:15</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Médico 1</td>
+                                            <td>20-10-2017</td>
+                                            <td>12:15</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Médico 2</td>
+                                            <td>20-10-2017</td>
+                                            <td>11:45</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Médico 3</td>
+                                            <td>24-10-2017</td>
+                                            <td>11:00</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Médico 3</td>
+                                            <td>24-10-2017</td>
+                                            <td>11:30</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="horas-disponibles-medico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <div id="login-form">
+                    <div class="modal-body">
+                        <div id="div-login-msg">
+                            <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                            <span id="text-login-msg">Próximas horas disponibles</span>
+                        </div>
+                        <div class="row t-spacing">
+                            <div class="col-sm-6">
+                                <label class="form-label">Nombre Paciente</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Paciente Prueba 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">RUT</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">xx.xxx.xxx-x</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Centro Médico</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">CESFAM Joan Alsina</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Sector</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Sector Azul</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-control">Médico</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-control">Médico 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-4">Especialidad</th>
+                                            <th class="col-sm-3">Fecha</th>
+                                            <th class="col-sm-3">Hora</th>
+                                            <th class="col-sm-2">Solicitar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Medicina general</td>
+                                            <td>20-10-2017</td>
+                                            <td>10:15</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Medicina general</td>
+                                            <td>24-10-2017</td>
+                                            <td>11:00</td>
+                                            <td><a href="#" data-toggle="modal" data-target="#confirm-hora"><span class="fa-stack fa-lg pull-left"><i class="fa fa-address-book-o fa-stack-1x "></i></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-hora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <span id="text-login-msg">¿Solicitar hora médica?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok" href="@Url.Action("Index","PortalPacientes")">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+

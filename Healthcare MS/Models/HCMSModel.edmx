@@ -1,0 +1,1737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HCMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgendaExamen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdPaciente" Type="int" Nullable="false" />
+          <Property Name="fk_IdFuncionarioAgendo" Type="int" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="FechaAgendada" Type="datetime" Nullable="false" />
+          <Property Name="fk_IdSector" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="HoraRealExamen" Type="datetime" />
+          <Property Name="fk_IdFuncionarioAtendio" Type="int" />
+        </EntityType>
+        <EntityType Name="CategoriaExamen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripción" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Cobertura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="fk_IdRegion" Type="int" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fk_IdComuna" Type="int" Nullable="false" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Telefono_2" Type="int" />
+          <Property Name="Linea_800" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadoHoraMedica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Examen_TipoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdAgendaExamen" Type="int" Nullable="false" />
+          <Property Name="fk_IdTipoExamen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamenAnulado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdAgendaExamen" Type="int" Nullable="false" />
+          <Property Name="FechaAnulacion" Type="datetime" Nullable="false" />
+          <Property Name="Motivo" Type="nvarchar(max)" />
+          <Property Name="fk_IdRol_IdPersona" Type="int" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdPersona" Type="int" Nullable="false" />
+          <Property Name="Observacion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Funcionario_Especialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdFuncionario" Type="int" Nullable="false" />
+          <Property Name="fk_IdEspecialidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Funcionario_Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdFuncionario" Type="int" Nullable="false" />
+          <Property Name="fk_IdEstablecimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HoraAnulada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdHoraMedica" Type="int" Nullable="false" />
+          <Property Name="FechaAnulacion" Type="datetime" Nullable="false" />
+          <Property Name="Motivo" Type="nvarchar(max)" />
+          <Property Name="fk_IdRol_Persona" Type="int" />
+        </EntityType>
+        <EntityType Name="HoraMedica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaHoraCargada" Type="datetime" Nullable="false" />
+          <Property Name="fk_IdFuncionario_Especialidad" Type="int" Nullable="false" />
+          <Property Name="Disponible" Type="bit" Nullable="false" />
+          <Property Name="fk_IdPaciente" Type="int" />
+          <Property Name="fk_IdEstadoHoraMedica" Type="int" Nullable="false" />
+          <Property Name="fk_IdSector" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_persona" Type="int" Nullable="false" />
+          <Property Name="fk_cobertura" Type="int" />
+          <Property Name="Observacion" Type="nvarchar(max)" />
+          <Property Name="NombresContacto" Type="nvarchar(max)" />
+          <Property Name="ApellidosContacto" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentescoContacto" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoContacto" Type="nvarchar" MaxLength="20" />
+          <Property Name="CelularContacto" Type="nvarchar" MaxLength="20" />
+          <Property Name="EmailContacto" Type="nvarchar" MaxLength="100" />
+          <Property Name="fk_IdSector" Type="int" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rut" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Sal" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fk_IdComuna" Type="int" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="Celular" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailConfirmado" Type="bit" Nullable="false" />
+          <Property Name="BloqueadoIntentos" Type="bit" Nullable="false" />
+          <Property Name="Bloqueado" Type="bit" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ResultadoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdExamen_TipoExamen" Type="int" Nullable="false" />
+          <Property Name="resultado" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="valor_referencia" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol_Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_IdRol" Type="int" Nullable="false" />
+          <Property Name="fk_IdPersona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fk_IdEstablecimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fk_IdCategoriaExamen" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_agenda_ex_tipo_agendaExamen">
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="1" />
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgendaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examen_TipoExamen">
+              <PropertyRef Name="fk_IdAgendaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_ex_tipo_tipo_examen">
+          <End Role="TipoExamen" Type="Self.TipoExamen" Multiplicity="1" />
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoExamen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examen_TipoExamen">
+              <PropertyRef Name="fk_IdTipoExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_examen_funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdFuncionarioAgendo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_examen_paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgendaExamen_funcionarioAtencion">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="0..1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdFuncionarioAtendio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgendaExamen_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comuna_Comuna">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comuna">
+              <PropertyRef Name="fk_IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_establecimiento_establecimiento">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Establecimiento">
+              <PropertyRef Name="fk_IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamenAnulado_AgendaExamen">
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="1" />
+          <End Role="ExamenAnulado" Type="Self.ExamenAnulado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgendaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamenAnulado">
+              <PropertyRef Name="fk_IdAgendaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Especialidad_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Especialidad">
+              <PropertyRef Name="fk_IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Especialidad_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Especialidad">
+              <PropertyRef Name="fk_IdFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Establecimiento_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="Funcionario_Establecimiento" Type="Self.Funcionario_Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Establecimiento">
+              <PropertyRef Name="fk_IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Establecimiento_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Funcionario_Establecimiento" Type="Self.Funcionario_Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Establecimiento">
+              <PropertyRef Name="fk_IdFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraAnulada_HoraMedica">
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="1" />
+          <End Role="HoraAnulada" Type="Self.HoraAnulada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoraMedica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraAnulada">
+              <PropertyRef Name="fk_IdHoraMedica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraAnulada_Rol_Persona">
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="0..1" />
+          <End Role="HoraAnulada" Type="Self.HoraAnulada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraAnulada">
+              <PropertyRef Name="fk_IdRol_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_EstadoHoraMedica">
+          <End Role="EstadoHoraMedica" Type="Self.EstadoHoraMedica" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoHoraMedica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdEstadoHoraMedica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Funcionario_Especialidad">
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario_Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdFuncionario_Especialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_cobertura">
+          <End Role="Cobertura" Type="Self.Cobertura" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_cobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_persona_comuna">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="fk_IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_persona_funcionario">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="fk_IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resultado_examen_agenda_ex_tipo">
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="1" />
+          <End Role="ResultadoExamen" Type="Self.ResultadoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen_TipoExamen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ResultadoExamen">
+              <PropertyRef Name="fk_IdExamen_TipoExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Persona_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol_Persona">
+              <PropertyRef Name="fk_IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Persona_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol_Persona">
+              <PropertyRef Name="fk_IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="fk_IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoExamen_ToTable">
+          <End Role="CategoriaExamen" Type="Self.CategoriaExamen" Multiplicity="1" />
+          <End Role="TipoExamen" Type="Self.TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoExamen">
+              <PropertyRef Name="fk_IdCategoriaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HCMSModelStoreContainer">
+          <EntitySet Name="AgendaExamen" EntityType="Self.AgendaExamen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriaExamen" EntityType="Self.CategoriaExamen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cobertura" EntityType="Self.Cobertura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoHoraMedica" EntityType="Self.EstadoHoraMedica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examen_TipoExamen" EntityType="Self.Examen_TipoExamen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamenAnulado" EntityType="Self.ExamenAnulado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funcionario_Especialidad" EntityType="Self.Funcionario_Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funcionario_Establecimiento" EntityType="Self.Funcionario_Establecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoraAnulada" EntityType="Self.HoraAnulada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoraMedica" EntityType="Self.HoraMedica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadoExamen" EntityType="Self.ResultadoExamen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol_Persona" EntityType="Self.Rol_Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoExamen" EntityType="Self.TipoExamen" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_agenda_ex_tipo_agendaExamen" Association="Self.FK_agenda_ex_tipo_agendaExamen">
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_ex_tipo_tipo_examen" Association="Self.FK_agenda_ex_tipo_tipo_examen">
+            <End Role="TipoExamen" EntitySet="TipoExamen" />
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_examen_funcionario" Association="Self.FK_agenda_examen_funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_examen_paciente" Association="Self.FK_agenda_examen_paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgendaExamen_funcionarioAtencion" Association="Self.FK_AgendaExamen_funcionarioAtencion">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgendaExamen_Sector" Association="Self.FK_AgendaExamen_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comuna_Comuna" Association="Self.FK_Comuna_Comuna">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Comuna" EntitySet="Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_establecimiento_establecimiento" Association="Self.FK_establecimiento_establecimiento">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamenAnulado_AgendaExamen" Association="Self.FK_ExamenAnulado_AgendaExamen">
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+            <End Role="ExamenAnulado" EntitySet="ExamenAnulado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Especialidad_Especialidad" Association="Self.FK_Funcionario_Especialidad_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Especialidad_Funcionario" Association="Self.FK_Funcionario_Especialidad_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Establecimiento_Establecimiento" Association="Self.FK_Funcionario_Establecimiento_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Funcionario_Establecimiento" EntitySet="Funcionario_Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Establecimiento_Funcionario" Association="Self.FK_Funcionario_Establecimiento_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Funcionario_Establecimiento" EntitySet="Funcionario_Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraAnulada_HoraMedica" Association="Self.FK_HoraAnulada_HoraMedica">
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+            <End Role="HoraAnulada" EntitySet="HoraAnulada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraAnulada_Rol_Persona" Association="Self.FK_HoraAnulada_Rol_Persona">
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+            <End Role="HoraAnulada" EntitySet="HoraAnulada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_EstadoHoraMedica" Association="Self.FK_HoraMedica_EstadoHoraMedica">
+            <End Role="EstadoHoraMedica" EntitySet="EstadoHoraMedica" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Funcionario_Especialidad" Association="Self.FK_HoraMedica_Funcionario_Especialidad">
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Paciente" Association="Self.FK_HoraMedica_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Sector" Association="Self.FK_HoraMedica_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_cobertura" Association="Self.FK_paciente_cobertura">
+            <End Role="Cobertura" EntitySet="Cobertura" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_persona" Association="Self.FK_paciente_persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_sector" Association="Self.FK_paciente_sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_persona_comuna" Association="Self.FK_persona_comuna">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_persona_funcionario" Association="Self.FK_persona_funcionario">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Funcionario" EntitySet="Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resultado_examen_agenda_ex_tipo" Association="Self.FK_resultado_examen_agenda_ex_tipo">
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+            <End Role="ResultadoExamen" EntitySet="ResultadoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Persona_Persona" Association="Self.FK_Rol_Persona_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Persona_Rol" Association="Self.FK_Rol_Persona_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_Establecimiento" Association="Self.FK_Sector_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoExamen_ToTable" Association="Self.FK_TipoExamen_ToTable">
+            <End Role="CategoriaExamen" EntitySet="CategoriaExamen" />
+            <End Role="TipoExamen" EntitySet="TipoExamen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HCMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgendaExamen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdPaciente" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdFuncionarioAgendo" Type="Int32" Nullable="false" />
+          <Property Name="FechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaAgendada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_IdSector" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoraRealExamen" Type="DateTime" Precision="3" />
+          <Property Name="fk_IdFuncionarioAtendio" Type="Int32" />
+          <NavigationProperty Name="Examen_TipoExamen" Relationship="Self.FK_agenda_ex_tipo_agendaExamen" FromRole="AgendaExamen" ToRole="Examen_TipoExamen" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.FK_agenda_examen_funcionario" FromRole="AgendaExamen" ToRole="Funcionario" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_agenda_examen_paciente" FromRole="AgendaExamen" ToRole="Paciente" />
+          <NavigationProperty Name="Funcionario1" Relationship="Self.FK_AgendaExamen_funcionarioAtencion" FromRole="AgendaExamen" ToRole="Funcionario" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_AgendaExamen_Sector" FromRole="AgendaExamen" ToRole="Sector" />
+          <NavigationProperty Name="ExamenAnulado" Relationship="Self.FK_ExamenAnulado_AgendaExamen" FromRole="AgendaExamen" ToRole="ExamenAnulado" />
+        </EntityType>
+        <EntityType Name="CategoriaExamen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripción" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TipoExamen" Relationship="Self.FK_TipoExamen_ToTable" FromRole="CategoriaExamen" ToRole="TipoExamen" />
+        </EntityType>
+        <EntityType Name="Cobertura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_paciente_cobertura" FromRole="Cobertura" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fk_IdRegion" Type="Int32" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Comuna_Comuna" FromRole="Comuna" ToRole="Region" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_establecimiento_establecimiento" FromRole="Comuna" ToRole="Establecimiento" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_persona_comuna" FromRole="Comuna" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Funcionario_Especialidad" Relationship="Self.FK_Funcionario_Especialidad_Especialidad" FromRole="Especialidad" ToRole="Funcionario_Especialidad" />
+        </EntityType>
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fk_IdComuna" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Telefono_2" Type="Int32" />
+          <Property Name="Linea_800" Type="Int32" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK_establecimiento_establecimiento" FromRole="Establecimiento" ToRole="Comuna" />
+          <NavigationProperty Name="Funcionario_Establecimiento" Relationship="Self.FK_Funcionario_Establecimiento_Establecimiento" FromRole="Establecimiento" ToRole="Funcionario_Establecimiento" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_Sector_Establecimiento" FromRole="Establecimiento" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="EstadoHoraMedica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HoraMedica" Relationship="Self.FK_HoraMedica_EstadoHoraMedica" FromRole="EstadoHoraMedica" ToRole="HoraMedica" />
+        </EntityType>
+        <EntityType Name="Examen_TipoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdAgendaExamen" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdTipoExamen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgendaExamen" Relationship="Self.FK_agenda_ex_tipo_agendaExamen" FromRole="Examen_TipoExamen" ToRole="AgendaExamen" />
+          <NavigationProperty Name="TipoExamen" Relationship="Self.FK_agenda_ex_tipo_tipo_examen" FromRole="Examen_TipoExamen" ToRole="TipoExamen" />
+          <NavigationProperty Name="ResultadoExamen" Relationship="Self.FK_resultado_examen_agenda_ex_tipo" FromRole="Examen_TipoExamen" ToRole="ResultadoExamen" />
+        </EntityType>
+        <EntityType Name="ExamenAnulado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdAgendaExamen" Type="Int32" Nullable="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fk_IdRol_IdPersona" Type="Int32" />
+          <NavigationProperty Name="AgendaExamen" Relationship="Self.FK_ExamenAnulado_AgendaExamen" FromRole="ExamenAnulado" ToRole="AgendaExamen" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AgendaExamen" Relationship="Self.FK_agenda_examen_funcionario" FromRole="Funcionario" ToRole="AgendaExamen" />
+          <NavigationProperty Name="AgendaExamen1" Relationship="Self.FK_AgendaExamen_funcionarioAtencion" FromRole="Funcionario" ToRole="AgendaExamen" />
+          <NavigationProperty Name="Funcionario_Especialidad" Relationship="Self.FK_Funcionario_Especialidad_Funcionario" FromRole="Funcionario" ToRole="Funcionario_Especialidad" />
+          <NavigationProperty Name="Funcionario_Establecimiento" Relationship="Self.FK_Funcionario_Establecimiento_Funcionario" FromRole="Funcionario" ToRole="Funcionario_Establecimiento" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_persona_funcionario" FromRole="Funcionario" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Funcionario_Especialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdFuncionario" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdEspecialidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK_Funcionario_Especialidad_Especialidad" FromRole="Funcionario_Especialidad" ToRole="Especialidad" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.FK_Funcionario_Especialidad_Funcionario" FromRole="Funcionario_Especialidad" ToRole="Funcionario" />
+          <NavigationProperty Name="HoraMedica" Relationship="Self.FK_HoraMedica_Funcionario_Especialidad" FromRole="Funcionario_Especialidad" ToRole="HoraMedica" />
+        </EntityType>
+        <EntityType Name="Funcionario_Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdFuncionario" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdEstablecimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_Funcionario_Establecimiento_Establecimiento" FromRole="Funcionario_Establecimiento" ToRole="Establecimiento" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.FK_Funcionario_Establecimiento_Funcionario" FromRole="Funcionario_Establecimiento" ToRole="Funcionario" />
+        </EntityType>
+        <EntityType Name="HoraAnulada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdHoraMedica" Type="Int32" Nullable="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fk_IdRol_Persona" Type="Int32" />
+          <NavigationProperty Name="HoraMedica" Relationship="Self.FK_HoraAnulada_HoraMedica" FromRole="HoraAnulada" ToRole="HoraMedica" />
+          <NavigationProperty Name="Rol_Persona" Relationship="Self.FK_HoraAnulada_Rol_Persona" FromRole="HoraAnulada" ToRole="Rol_Persona" />
+        </EntityType>
+        <EntityType Name="HoraMedica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaHoraCargada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_IdFuncionario_Especialidad" Type="Int32" Nullable="false" />
+          <Property Name="Disponible" Type="Boolean" Nullable="false" />
+          <Property Name="fk_IdPaciente" Type="Int32" />
+          <Property Name="fk_IdEstadoHoraMedica" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdSector" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EstadoHoraMedica" Relationship="Self.FK_HoraMedica_EstadoHoraMedica" FromRole="HoraMedica" ToRole="EstadoHoraMedica" />
+          <NavigationProperty Name="Funcionario_Especialidad" Relationship="Self.FK_HoraMedica_Funcionario_Especialidad" FromRole="HoraMedica" ToRole="Funcionario_Especialidad" />
+          <NavigationProperty Name="HoraAnulada" Relationship="Self.FK_HoraAnulada_HoraMedica" FromRole="HoraMedica" ToRole="HoraAnulada" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_HoraMedica_Paciente" FromRole="HoraMedica" ToRole="Paciente" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_HoraMedica_Sector" FromRole="HoraMedica" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_persona" Type="Int32" Nullable="false" />
+          <Property Name="fk_cobertura" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NombresContacto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidosContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentescoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CelularContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EmailContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fk_IdSector" Type="Int32" />
+          <NavigationProperty Name="AgendaExamen" Relationship="Self.FK_agenda_examen_paciente" FromRole="Paciente" ToRole="AgendaExamen" />
+          <NavigationProperty Name="Cobertura" Relationship="Self.FK_paciente_cobertura" FromRole="Paciente" ToRole="Cobertura" />
+          <NavigationProperty Name="HoraMedica" Relationship="Self.FK_HoraMedica_Paciente" FromRole="Paciente" ToRole="HoraMedica" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_paciente_persona" FromRole="Paciente" ToRole="Persona" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_paciente_sector" FromRole="Paciente" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rut" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sal" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fk_IdComuna" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmado" Type="Boolean" Nullable="false" />
+          <Property Name="BloqueadoIntentos" Type="Boolean" Nullable="false" />
+          <Property Name="Bloqueado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK_persona_comuna" FromRole="Persona" ToRole="Comuna" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.FK_persona_funcionario" FromRole="Persona" ToRole="Funcionario" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_paciente_persona" FromRole="Persona" ToRole="Paciente" />
+          <NavigationProperty Name="Rol_Persona" Relationship="Self.FK_Rol_Persona_Persona" FromRole="Persona" ToRole="Rol_Persona" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK_Comuna_Comuna" FromRole="Region" ToRole="Comuna" />
+        </EntityType>
+        <EntityType Name="ResultadoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdExamen_TipoExamen" Type="Int32" Nullable="false" />
+          <Property Name="resultado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="valor_referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Examen_TipoExamen" Relationship="Self.FK_resultado_examen_agenda_ex_tipo" FromRole="ResultadoExamen" ToRole="Examen_TipoExamen" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Rol_Persona" Relationship="Self.FK_Rol_Persona_Rol" FromRole="Rol" ToRole="Rol_Persona" />
+        </EntityType>
+        <EntityType Name="Rol_Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_IdRol" Type="Int32" Nullable="false" />
+          <Property Name="fk_IdPersona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HoraAnulada" Relationship="Self.FK_HoraAnulada_Rol_Persona" FromRole="Rol_Persona" ToRole="HoraAnulada" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Rol_Persona_Persona" FromRole="Rol_Persona" ToRole="Persona" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol_Persona_Rol" FromRole="Rol_Persona" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fk_IdEstablecimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgendaExamen" Relationship="Self.FK_AgendaExamen_Sector" FromRole="Sector" ToRole="AgendaExamen" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_Sector_Establecimiento" FromRole="Sector" ToRole="Establecimiento" />
+          <NavigationProperty Name="HoraMedica" Relationship="Self.FK_HoraMedica_Sector" FromRole="Sector" ToRole="HoraMedica" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_paciente_sector" FromRole="Sector" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="TipoExamen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fk_IdCategoriaExamen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriaExamen" Relationship="Self.FK_TipoExamen_ToTable" FromRole="TipoExamen" ToRole="CategoriaExamen" />
+          <NavigationProperty Name="Examen_TipoExamen" Relationship="Self.FK_agenda_ex_tipo_tipo_examen" FromRole="TipoExamen" ToRole="Examen_TipoExamen" />
+        </EntityType>
+        <Association Name="FK_agenda_ex_tipo_agendaExamen">
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="1" />
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgendaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examen_TipoExamen">
+              <PropertyRef Name="fk_IdAgendaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_examen_funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdFuncionarioAgendo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_examen_paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgendaExamen_funcionarioAtencion">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="0..1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdFuncionarioAtendio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgendaExamen_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgendaExamen">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamenAnulado_AgendaExamen">
+          <End Role="AgendaExamen" Type="Self.AgendaExamen" Multiplicity="1" />
+          <End Role="ExamenAnulado" Type="Self.ExamenAnulado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgendaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamenAnulado">
+              <PropertyRef Name="fk_IdAgendaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoExamen_ToTable">
+          <End Role="CategoriaExamen" Type="Self.CategoriaExamen" Multiplicity="1" />
+          <End Role="TipoExamen" Type="Self.TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaExamen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoExamen">
+              <PropertyRef Name="fk_IdCategoriaExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_cobertura">
+          <End Role="Cobertura" Type="Self.Cobertura" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_cobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comuna_Comuna">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comuna">
+              <PropertyRef Name="fk_IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_establecimiento_establecimiento">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Establecimiento">
+              <PropertyRef Name="fk_IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_persona_comuna">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="fk_IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Especialidad_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Especialidad">
+              <PropertyRef Name="fk_IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Establecimiento_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="Funcionario_Establecimiento" Type="Self.Funcionario_Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Establecimiento">
+              <PropertyRef Name="fk_IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="fk_IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_EstadoHoraMedica">
+          <End Role="EstadoHoraMedica" Type="Self.EstadoHoraMedica" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoHoraMedica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdEstadoHoraMedica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agenda_ex_tipo_tipo_examen">
+          <End Role="TipoExamen" Type="Self.TipoExamen" Multiplicity="1" />
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoExamen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examen_TipoExamen">
+              <PropertyRef Name="fk_IdTipoExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resultado_examen_agenda_ex_tipo">
+          <End Role="Examen_TipoExamen" Type="Self.Examen_TipoExamen" Multiplicity="1" />
+          <End Role="ResultadoExamen" Type="Self.ResultadoExamen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen_TipoExamen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ResultadoExamen">
+              <PropertyRef Name="fk_IdExamen_TipoExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Especialidad_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Especialidad">
+              <PropertyRef Name="fk_IdFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Establecimiento_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Funcionario_Establecimiento" Type="Self.Funcionario_Establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario_Establecimiento">
+              <PropertyRef Name="fk_IdFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_persona_funcionario">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="fk_IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Funcionario_Especialidad">
+          <End Role="Funcionario_Especialidad" Type="Self.Funcionario_Especialidad" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario_Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdFuncionario_Especialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraAnulada_HoraMedica">
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="1" />
+          <End Role="HoraAnulada" Type="Self.HoraAnulada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoraMedica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraAnulada">
+              <PropertyRef Name="fk_IdHoraMedica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraAnulada_Rol_Persona">
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="0..1" />
+          <End Role="HoraAnulada" Type="Self.HoraAnulada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraAnulada">
+              <PropertyRef Name="fk_IdRol_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoraMedica_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="HoraMedica" Type="Self.HoraMedica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoraMedica">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paciente_sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="fk_IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Persona_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol_Persona">
+              <PropertyRef Name="fk_IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Persona_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol_Persona" Type="Self.Rol_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol_Persona">
+              <PropertyRef Name="fk_IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HCMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgendaExamen" EntityType="Self.AgendaExamen" />
+          <EntitySet Name="CategoriaExamen" EntityType="Self.CategoriaExamen" />
+          <EntitySet Name="Cobertura" EntityType="Self.Cobertura" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" />
+          <EntitySet Name="EstadoHoraMedica" EntityType="Self.EstadoHoraMedica" />
+          <EntitySet Name="Examen_TipoExamen" EntityType="Self.Examen_TipoExamen" />
+          <EntitySet Name="ExamenAnulado" EntityType="Self.ExamenAnulado" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" />
+          <EntitySet Name="Funcionario_Especialidad" EntityType="Self.Funcionario_Especialidad" />
+          <EntitySet Name="Funcionario_Establecimiento" EntityType="Self.Funcionario_Establecimiento" />
+          <EntitySet Name="HoraAnulada" EntityType="Self.HoraAnulada" />
+          <EntitySet Name="HoraMedica" EntityType="Self.HoraMedica" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="ResultadoExamen" EntityType="Self.ResultadoExamen" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Rol_Persona" EntityType="Self.Rol_Persona" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" />
+          <EntitySet Name="TipoExamen" EntityType="Self.TipoExamen" />
+          <AssociationSet Name="FK_agenda_ex_tipo_agendaExamen" Association="Self.FK_agenda_ex_tipo_agendaExamen">
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_examen_funcionario" Association="Self.FK_agenda_examen_funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_examen_paciente" Association="Self.FK_agenda_examen_paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgendaExamen_funcionarioAtencion" Association="Self.FK_AgendaExamen_funcionarioAtencion">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgendaExamen_Sector" Association="Self.FK_AgendaExamen_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamenAnulado_AgendaExamen" Association="Self.FK_ExamenAnulado_AgendaExamen">
+            <End Role="AgendaExamen" EntitySet="AgendaExamen" />
+            <End Role="ExamenAnulado" EntitySet="ExamenAnulado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoExamen_ToTable" Association="Self.FK_TipoExamen_ToTable">
+            <End Role="CategoriaExamen" EntitySet="CategoriaExamen" />
+            <End Role="TipoExamen" EntitySet="TipoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_cobertura" Association="Self.FK_paciente_cobertura">
+            <End Role="Cobertura" EntitySet="Cobertura" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comuna_Comuna" Association="Self.FK_Comuna_Comuna">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Comuna" EntitySet="Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_establecimiento_establecimiento" Association="Self.FK_establecimiento_establecimiento">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_persona_comuna" Association="Self.FK_persona_comuna">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Especialidad_Especialidad" Association="Self.FK_Funcionario_Especialidad_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Establecimiento_Establecimiento" Association="Self.FK_Funcionario_Establecimiento_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Funcionario_Establecimiento" EntitySet="Funcionario_Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_Establecimiento" Association="Self.FK_Sector_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_EstadoHoraMedica" Association="Self.FK_HoraMedica_EstadoHoraMedica">
+            <End Role="EstadoHoraMedica" EntitySet="EstadoHoraMedica" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agenda_ex_tipo_tipo_examen" Association="Self.FK_agenda_ex_tipo_tipo_examen">
+            <End Role="TipoExamen" EntitySet="TipoExamen" />
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resultado_examen_agenda_ex_tipo" Association="Self.FK_resultado_examen_agenda_ex_tipo">
+            <End Role="Examen_TipoExamen" EntitySet="Examen_TipoExamen" />
+            <End Role="ResultadoExamen" EntitySet="ResultadoExamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Especialidad_Funcionario" Association="Self.FK_Funcionario_Especialidad_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Establecimiento_Funcionario" Association="Self.FK_Funcionario_Establecimiento_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Funcionario_Establecimiento" EntitySet="Funcionario_Establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_persona_funcionario" Association="Self.FK_persona_funcionario">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Funcionario" EntitySet="Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Funcionario_Especialidad" Association="Self.FK_HoraMedica_Funcionario_Especialidad">
+            <End Role="Funcionario_Especialidad" EntitySet="Funcionario_Especialidad" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraAnulada_HoraMedica" Association="Self.FK_HoraAnulada_HoraMedica">
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+            <End Role="HoraAnulada" EntitySet="HoraAnulada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraAnulada_Rol_Persona" Association="Self.FK_HoraAnulada_Rol_Persona">
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+            <End Role="HoraAnulada" EntitySet="HoraAnulada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Paciente" Association="Self.FK_HoraMedica_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoraMedica_Sector" Association="Self.FK_HoraMedica_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="HoraMedica" EntitySet="HoraMedica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_persona" Association="Self.FK_paciente_persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paciente_sector" Association="Self.FK_paciente_sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Persona_Persona" Association="Self.FK_Rol_Persona_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Persona_Rol" Association="Self.FK_Rol_Persona_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_Persona" EntitySet="Rol_Persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HCMSModelStoreContainer" CdmEntityContainer="HCMSEntities">
+          <EntitySetMapping Name="AgendaExamen">
+            <EntityTypeMapping TypeName="HCMSModel.AgendaExamen">
+              <MappingFragment StoreEntitySet="AgendaExamen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdPaciente" ColumnName="fk_IdPaciente" />
+                <ScalarProperty Name="fk_IdFuncionarioAgendo" ColumnName="fk_IdFuncionarioAgendo" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="FechaAgendada" ColumnName="FechaAgendada" />
+                <ScalarProperty Name="fk_IdSector" ColumnName="fk_IdSector" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="HoraRealExamen" ColumnName="HoraRealExamen" />
+                <ScalarProperty Name="fk_IdFuncionarioAtendio" ColumnName="fk_IdFuncionarioAtendio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaExamen">
+            <EntityTypeMapping TypeName="HCMSModel.CategoriaExamen">
+              <MappingFragment StoreEntitySet="CategoriaExamen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripción" ColumnName="Descripción" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cobertura">
+            <EntityTypeMapping TypeName="HCMSModel.Cobertura">
+              <MappingFragment StoreEntitySet="Cobertura">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comuna">
+            <EntityTypeMapping TypeName="HCMSModel.Comuna">
+              <MappingFragment StoreEntitySet="Comuna">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="fk_IdRegion" ColumnName="fk_IdRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidad">
+            <EntityTypeMapping TypeName="HCMSModel.Especialidad">
+              <MappingFragment StoreEntitySet="Especialidad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Establecimiento">
+            <EntityTypeMapping TypeName="HCMSModel.Establecimiento">
+              <MappingFragment StoreEntitySet="Establecimiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="fk_IdComuna" ColumnName="fk_IdComuna" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Telefono_2" ColumnName="Telefono_2" />
+                <ScalarProperty Name="Linea_800" ColumnName="Linea_800" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoHoraMedica">
+            <EntityTypeMapping TypeName="HCMSModel.EstadoHoraMedica">
+              <MappingFragment StoreEntitySet="EstadoHoraMedica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examen_TipoExamen">
+            <EntityTypeMapping TypeName="HCMSModel.Examen_TipoExamen">
+              <MappingFragment StoreEntitySet="Examen_TipoExamen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_IdAgendaExamen" ColumnName="fk_IdAgendaExamen" />
+                <ScalarProperty Name="fk_IdTipoExamen" ColumnName="fk_IdTipoExamen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamenAnulado">
+            <EntityTypeMapping TypeName="HCMSModel.ExamenAnulado">
+              <MappingFragment StoreEntitySet="ExamenAnulado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdAgendaExamen" ColumnName="fk_IdAgendaExamen" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="fk_IdRol_IdPersona" ColumnName="fk_IdRol_IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funcionario">
+            <EntityTypeMapping TypeName="HCMSModel.Funcionario">
+              <MappingFragment StoreEntitySet="Funcionario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdPersona" ColumnName="fk_IdPersona" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funcionario_Especialidad">
+            <EntityTypeMapping TypeName="HCMSModel.Funcionario_Especialidad">
+              <MappingFragment StoreEntitySet="Funcionario_Especialidad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdFuncionario" ColumnName="fk_IdFuncionario" />
+                <ScalarProperty Name="fk_IdEspecialidad" ColumnName="fk_IdEspecialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funcionario_Establecimiento">
+            <EntityTypeMapping TypeName="HCMSModel.Funcionario_Establecimiento">
+              <MappingFragment StoreEntitySet="Funcionario_Establecimiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdFuncionario" ColumnName="fk_IdFuncionario" />
+                <ScalarProperty Name="fk_IdEstablecimiento" ColumnName="fk_IdEstablecimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoraAnulada">
+            <EntityTypeMapping TypeName="HCMSModel.HoraAnulada">
+              <MappingFragment StoreEntitySet="HoraAnulada">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdHoraMedica" ColumnName="fk_IdHoraMedica" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="fk_IdRol_Persona" ColumnName="fk_IdRol_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoraMedica">
+            <EntityTypeMapping TypeName="HCMSModel.HoraMedica">
+              <MappingFragment StoreEntitySet="HoraMedica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaHoraCargada" ColumnName="FechaHoraCargada" />
+                <ScalarProperty Name="fk_IdFuncionario_Especialidad" ColumnName="fk_IdFuncionario_Especialidad" />
+                <ScalarProperty Name="Disponible" ColumnName="Disponible" />
+                <ScalarProperty Name="fk_IdPaciente" ColumnName="fk_IdPaciente" />
+                <ScalarProperty Name="fk_IdEstadoHoraMedica" ColumnName="fk_IdEstadoHoraMedica" />
+                <ScalarProperty Name="fk_IdSector" ColumnName="fk_IdSector" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="HCMSModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_persona" ColumnName="fk_persona" />
+                <ScalarProperty Name="fk_cobertura" ColumnName="fk_cobertura" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="NombresContacto" ColumnName="NombresContacto" />
+                <ScalarProperty Name="ApellidosContacto" ColumnName="ApellidosContacto" />
+                <ScalarProperty Name="ParentescoContacto" ColumnName="ParentescoContacto" />
+                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+                <ScalarProperty Name="CelularContacto" ColumnName="CelularContacto" />
+                <ScalarProperty Name="EmailContacto" ColumnName="EmailContacto" />
+                <ScalarProperty Name="fk_IdSector" ColumnName="fk_IdSector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="HCMSModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Sal" ColumnName="Sal" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="fk_IdComuna" ColumnName="fk_IdComuna" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmado" ColumnName="EmailConfirmado" />
+                <ScalarProperty Name="BloqueadoIntentos" ColumnName="BloqueadoIntentos" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="HCMSModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultadoExamen">
+            <EntityTypeMapping TypeName="HCMSModel.ResultadoExamen">
+              <MappingFragment StoreEntitySet="ResultadoExamen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_IdExamen_TipoExamen" ColumnName="fk_IdExamen_TipoExamen" />
+                <ScalarProperty Name="resultado" ColumnName="resultado" />
+                <ScalarProperty Name="valor_referencia" ColumnName="valor_referencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="HCMSModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol_Persona">
+            <EntityTypeMapping TypeName="HCMSModel.Rol_Persona">
+              <MappingFragment StoreEntitySet="Rol_Persona">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_IdRol" ColumnName="fk_IdRol" />
+                <ScalarProperty Name="fk_IdPersona" ColumnName="fk_IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sector">
+            <EntityTypeMapping TypeName="HCMSModel.Sector">
+              <MappingFragment StoreEntitySet="Sector">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="fk_IdEstablecimiento" ColumnName="fk_IdEstablecimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoExamen">
+            <EntityTypeMapping TypeName="HCMSModel.TipoExamen">
+              <MappingFragment StoreEntitySet="TipoExamen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="fk_IdCategoriaExamen" ColumnName="fk_IdCategoriaExamen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

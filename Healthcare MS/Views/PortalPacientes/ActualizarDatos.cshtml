@@ -1,0 +1,257 @@
+﻿@model Healthcare_MS.Models.PPActualizarDatosModel
+@{
+    ViewBag.Title = "Actualizar Datos";
+}
+
+<h2>Actualiza tus datos</h2>
+<hr />
+<h3>Datos personales</h3>
+@using (Html.BeginForm("EditarDatosPersonales", "PortalPacientes", FormMethod.Post, new { id = "_DatosPersonalesForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.RutCompleto, "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.RutCompleto, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @disabled = "disabled" })
+            @Html.HiddenFor(m => m.editarDatosPersonales.Rut)
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.Nombres, "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.Nombres, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.Apellidos, "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.Apellidos, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.FechaNacimiento, "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.FechaNacimiento, new { type = "date", @class = "col-sm-4 col-md-3 col-lg-2 form-control", @Value = Model.editarDatosPersonales.FechaNacimiento.ToString("yyyy-MM-dd") })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.Region, "Región", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.Region,  new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @disabled = "disabled" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.Comuna, "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.Comuna, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @disabled = "disabled" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosPersonales.Direccion, "Dirección", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosPersonales.Direccion, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control", @disabled = "disabled" })
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <small>Para poder cambiar tu dirección, comuna o región, comunícate con tu centro médico más cercano</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <input type="submit" value="Actualizar datos personales" id="btnDatosPersonales" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2" />
+        </div>
+    </div>
+}
+
+<hr />
+<h3>¿Cómo podemos contactarte?</h3>
+@using (Html.BeginForm("EditarDatosContacto", "PortalPacientes", FormMethod.Post, new { id = "_DatosContactoForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.HiddenFor(m => m.editarDatosContacto.Rut)
+            @Html.LabelFor(m => Model.editarDatosContacto.Telefono, "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosContacto.Telefono, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosContacto.Celular, "Celular", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosContacto.Celular, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => Model.editarDatosContacto.Email, "Correo electrónico", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBoxFor(m => m.editarDatosContacto.Email, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            <input type="submit" value="Actualizar datos de contacto" id="btnDatosContacto" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2" />
+        </div>
+    </div>
+}
+
+<hr />
+<h3>Contraseña</h3>
+@using (Html.BeginForm("ActualizarPassword", "PortalPacientes", FormMethod.Post, new { id = "_PasswordForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row x-spacing">
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.HiddenFor(m => m.editarPassword.Rut)
+                @Html.LabelFor(m => Model.editarPassword.OldPassword, "Contraseña antigua", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.PasswordFor(m => Model.editarPassword.OldPassword, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarPassword.NewPassword, "Nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.PasswordFor(m => m.editarPassword.NewPassword, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarPassword.RepeatPassword, "Repite la nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.PasswordFor(m => m.editarPassword.RepeatPassword, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="Cambiar contraseña" id="btnPassword" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<h3>Indica un contacto si no podemos comunicarnos contigo</h3>
+@using (Html.BeginForm("EditarContacto", "PortalPacientes", FormMethod.Post, new { id = "_ContactoForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row x-spacing bl-spacing">
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.HiddenFor(m => m.editarContacto.Rut)
+                @Html.LabelFor(m => Model.editarContacto.NombreContacto, "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.NombreContacto, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m =>Model.editarContacto.ApellidoContacto, "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.ApellidoContacto, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarContacto.Parentesco, "Parentesco", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.Parentesco, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarContacto.Telefono, "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.Telefono, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarContacto.Celular, new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.Celular, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => Model.editarContacto.Correo, "Correo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.TextBoxFor(m => m.editarContacto.Correo, new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="Actualizar contacto" id="btnActualizarContacto" class="btn btn-primary col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="Modal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='ModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                $('#btnDatosPersonales').click(function (e) {
+                    e.preventDefault();
+                    $('#Progress').modal('toggle');
+                    var form = $('#_DatosPersonalesForm');
+                    var token = $('input[name="__RequestVerificationToken"]', form).val();
+                    $('#resultado').remove();
+                    var data = {
+                        __RequestVerificationToken: token,
+                        Rut: $('#editarDatosPersonales_Rut').val(),
+                        Nombres: $('#editarDatosPersonales_Nombres').val(),
+                        Apellidos: $('#editarDatosPersonales_Apellidos').val(),
+                        FechaNacimiento: $('#editarDatosPersonales_FechaNacimiento').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/PortalPacientes/EditarDatosPersonales',
+                        data: JSON.stringify(data),
+                        contentType: "application/json"
+                    }).success(function (html) {
+                        $('#ModalContent').append(html);
+                        $('#Progress').modal('toggle');
+                        $('#Modal').modal('toggle');
+                    });
+                });
+                $('#btnDatosContacto').click(function (e) {
+                    e.preventDefault();
+                    $('#Progress').modal('toggle');
+                    var form = $('#_DatosContactoForm');
+                    var token = $('input[name="__RequestVerificationToken"]', form).val();
+                    $('#resultado').remove();
+                    var data = {
+                        __RequestVerificationToken: token,
+                        Rut: $('#editarDatosContacto_Rut').val(),
+                        Telefono: $('#editarDatosContacto_Telefono').val(),
+                        Celular: $('#editarDatosContacto_Celular').val(),
+                        Email: $('#editarDatosContacto_Email').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/PortalPacientes/EditarDatosContacto',
+                        data: JSON.stringify(data),
+                        contentType: "application/json"
+                    }).success(function (html) {
+                        $('#ModalContent').append(html);
+                        $('#Progress').modal('toggle');
+                        $('#Modal').modal('toggle');
+                    });
+                });
+                $('#btnPassword').click(function (e) {
+                    e.preventDefault();
+                    $('#Progress').modal('toggle');
+                    var form = $('#_PasswordForm');
+                    var token = $('input[name="__RequestVerificationToken"]', form).val();
+                    $('#resultado').remove();
+                    var data = {
+                        __RequestVerificationToken: token,
+                        Rut: $('#editarPassword_Rut').val(),
+                        OldPassword: $('#editarPassword_OldPassword').val(),
+                        NewPassword: $('#editarPassword_NewPassword').val(),
+                        RepeatPassword: $('#editarPassword_RepeatPassword').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/PortalPacientes/ActualizarPassword',
+                        data: JSON.stringify(data),
+                        contentType: "application/json"
+                    }).success(function (html) {
+                        $('#ModalContent').append(html);
+                        $('#Progress').modal('toggle');
+                        $('#Modal').modal('toggle');
+                    });
+                });
+                $('#btnActualizarContacto').click(function (e) {
+                    $('#Progress').modal('toggle');
+                    var form = $('#_ContactoForm');
+                    var token = $('input[name="__RequestVerificationToken"]', form).val();
+                    e.preventDefault();
+                    $('#resultado').remove();
+                    var data = {
+                        __RequestVerificationToken: token,
+                        Rut: $('#editarContacto_Rut').val(),
+                        NombreContacto: $('#editarContacto_NombreContacto').val(),
+                        ApellidoContacto: $('#editarContacto_ApellidoContacto').val(),
+                        Parentesco: $('#editarContacto_Parentesco').val(),
+                        Telefono: $('#editarContacto_Telefono').val(),
+                        Celular: $('#editarContacto_Celular').val(),
+                        Correo: $('#editarContacto_Correo').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/PortalPacientes/EditarContacto',
+                        data: JSON.stringify(data),
+                        contentType: "application/json"
+                    }).success(function (html) {
+                        $('#ModalContent').append(html);
+                        $('#Progress').modal('toggle');
+                        $('#Modal').modal('toggle');
+                    });
+                });
+            });
+    </script>
+}

@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "ActualizarDatos";
+}
+
+<h2>Actualiza tus datos</h2>
+<hr />
+<h3>Datos personales</h3>
+<form>
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.Label("RUT", "RUT", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.Label("RUT_", "xx.xxx.xxx-x", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("Nombres", "Nombres", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("nombres", "Alicia", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("Apellidos", "Apellidos", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("apellidos", "Victoriano", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("FechaNacimiento", "Fecha de nacimiento", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            <input type="date" class="col-sm-4 col-md-3 col-lg-2 form-control" max="@DateTime.Now.Date.ToString("yyyy-MM-dd")" value="1980-05-10" />
+        </div>
+        <div class="form-group row">
+            @Html.Label("Region", "Región", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.Label("Region", "Metropolitana", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("Comuna", "Comuna", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.Label("Comuna", "San Bernardo", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("Direccion", "Dirección", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.Label("Direccion", "General Urrutia 319", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <small>Para poder cambiar tu dirección, comuna o región, comunícate con el Administrador</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                Actualizar datos personales
+            </a>
+        </div>
+    </div>
+</form>
+
+<hr />
+<h3>¿Cómo podemos contactarte?</h3>
+<form>
+    <div class="row x-spacing">
+        <div class="form-group row">
+            @Html.Label("telefono", "Teléfono", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("telefono", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("celular", "Celular", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("celular", "9 9346 6449", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            @Html.Label("email", "Correo electrónico", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+            @Html.TextBox("email", "correo.prueba@pruebas.cl", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+        </div>
+        <div class="form-group row">
+            <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                Actualizar datos de contacto
+            </a>
+        </div>
+    </div>
+</form>
+
+<hr />
+<h3>Contraseña</h3>
+<form>
+    <div class="row x-spacing bl-spacing">
+        <div class="form-group">
+            <div class="form-group row">
+                @Html.Label("oldPass", "Contraseña antigua", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Password("oldPass", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("newPass", "Nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Password("newPass", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                @Html.Label("repeatPass", "Repite la nueva contraseña", new { @class = "col-sm-4 col-md-3 col-lg-2 form-label" })
+                @Html.Password("repeatPass", "", new { @class = "col-sm-4 col-md-3 col-lg-2 form-control" })
+            </div>
+            <div class="form-group row">
+                <a class="col-sm-4 col-md-3 col-lg-2 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 btn btn-primary">
+                    Cambiar contraseña
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
